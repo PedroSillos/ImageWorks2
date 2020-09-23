@@ -8,3 +8,13 @@ C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\Editor de imagens\Editor 
 C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\Editor de imagens\Editor de imagens\obj\Debug\Editor de imagens.exe
 C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\Editor de imagens\Editor de imagens\obj\Debug\Editor de imagens.pdb
 C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\Editor de imagens\Editor de imagens\obj\Debug\Editor de imagens.csprojAssemblyReference.cache
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\bin\Debug\Editor de imagens.exe.config
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\bin\Debug\Editor de imagens.exe
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\bin\Debug\Editor de imagens.pdb
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor de imagens.csprojAssemblyReference.cache
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor_de_imagens.EditorDeImagem.resources
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor_de_imagens.Properties.Resources.resources
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor de imagens.csproj.GenerateResource.cache
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor de imagens.csproj.CoreCompileInputs.cache
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor de imagens.exe
+C:\Users\psillosx\OneDrive - Intel Corporation\Desktop\ImageWorks2\Editor de imagens\obj\Debug\Editor de imagens.pdb

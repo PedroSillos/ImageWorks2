@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea13 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend13 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series13 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea14 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend14 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series14 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button_carregar_imagem = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_alterar_imagem = new System.Windows.Forms.Button();
@@ -43,11 +43,17 @@
             this.rbtn_clarear = new System.Windows.Forms.RadioButton();
             this.chart_imagem_alterada = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.button_suavizar = new System.Windows.Forms.Button();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.rbtn_mediana = new System.Windows.Forms.RadioButton();
+            this.rbtn_media = new System.Windows.Forms.RadioButton();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_imagem_cortada)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_imagem_alterada)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // button_carregar_imagem
@@ -109,17 +115,17 @@
             // chart_imagem_cortada
             // 
             this.chart_imagem_cortada.BackColor = System.Drawing.Color.Transparent;
-            chartArea5.Name = "ChartArea1";
-            this.chart_imagem_cortada.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.chart_imagem_cortada.Legends.Add(legend5);
+            chartArea13.Name = "ChartArea1";
+            this.chart_imagem_cortada.ChartAreas.Add(chartArea13);
+            legend13.Name = "Legend1";
+            this.chart_imagem_cortada.Legends.Add(legend13);
             this.chart_imagem_cortada.Location = new System.Drawing.Point(163, 378);
             this.chart_imagem_cortada.Name = "chart_imagem_cortada";
-            series5.ChartArea = "ChartArea1";
-            series5.IsVisibleInLegend = false;
-            series5.Legend = "Legend1";
-            series5.Name = "Cortada";
-            this.chart_imagem_cortada.Series.Add(series5);
+            series13.ChartArea = "ChartArea1";
+            series13.IsVisibleInLegend = false;
+            series13.Legend = "Legend1";
+            series13.Name = "Cortada";
+            this.chart_imagem_cortada.Series.Add(series13);
             this.chart_imagem_cortada.Size = new System.Drawing.Size(360, 153);
             this.chart_imagem_cortada.TabIndex = 8;
             this.chart_imagem_cortada.TabStop = false;
@@ -138,17 +144,17 @@
             // chart_imagem_alterada
             // 
             this.chart_imagem_alterada.BackColor = System.Drawing.Color.Transparent;
-            chartArea6.Name = "ChartArea1";
-            this.chart_imagem_alterada.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend1";
-            this.chart_imagem_alterada.Legends.Add(legend6);
+            chartArea14.Name = "ChartArea1";
+            this.chart_imagem_alterada.ChartAreas.Add(chartArea14);
+            legend14.Name = "Legend1";
+            this.chart_imagem_alterada.Legends.Add(legend14);
             this.chart_imagem_alterada.Location = new System.Drawing.Point(662, 378);
             this.chart_imagem_alterada.Name = "chart_imagem_alterada";
-            series6.ChartArea = "ChartArea1";
-            series6.IsVisibleInLegend = false;
-            series6.Legend = "Legend1";
-            series6.Name = "Cortada";
-            this.chart_imagem_alterada.Series.Add(series6);
+            series14.ChartArea = "ChartArea1";
+            series14.IsVisibleInLegend = false;
+            series14.Legend = "Legend1";
+            series14.Name = "Cortada";
+            this.chart_imagem_alterada.Series.Add(series14);
             this.chart_imagem_alterada.Size = new System.Drawing.Size(360, 153);
             this.chart_imagem_alterada.TabIndex = 11;
             this.chart_imagem_alterada.TabStop = false;
@@ -167,12 +173,84 @@
             this.numericUpDown1.TabIndex = 12;
             this.numericUpDown1.Tag = "";
             // 
+            // button_suavizar
+            // 
+            this.button_suavizar.AccessibleName = "button_suavizar";
+            this.button_suavizar.AutoSize = true;
+            this.button_suavizar.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button_suavizar.Location = new System.Drawing.Point(529, 258);
+            this.button_suavizar.Name = "button_suavizar";
+            this.button_suavizar.Size = new System.Drawing.Size(127, 27);
+            this.button_suavizar.TabIndex = 13;
+            this.button_suavizar.TabStop = false;
+            this.button_suavizar.Text = "Suavizar";
+            this.button_suavizar.UseVisualStyleBackColor = true;
+            this.button_suavizar.Click += new System.EventHandler(this.button_suavizar_Click);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(529, 230);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            360,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(127, 22);
+            this.numericUpDown2.TabIndex = 16;
+            this.numericUpDown2.TabStop = false;
+            this.numericUpDown2.Tag = "";
+            this.numericUpDown2.Value = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+            // 
+            // rbtn_mediana
+            // 
+            this.rbtn_mediana.AutoSize = true;
+            this.rbtn_mediana.Location = new System.Drawing.Point(538, 186);
+            this.rbtn_mediana.Name = "rbtn_mediana";
+            this.rbtn_mediana.Size = new System.Drawing.Size(83, 21);
+            this.rbtn_mediana.TabIndex = 15;
+            this.rbtn_mediana.Text = "Mediana";
+            this.rbtn_mediana.UseVisualStyleBackColor = true;
+            // 
+            // rbtn_media
+            // 
+            this.rbtn_media.AutoSize = true;
+            this.rbtn_media.Location = new System.Drawing.Point(538, 159);
+            this.rbtn_media.Name = "rbtn_media";
+            this.rbtn_media.Size = new System.Drawing.Size(67, 21);
+            this.rbtn_media.TabIndex = 14;
+            this.rbtn_media.Text = "Media";
+            this.rbtn_media.UseVisualStyleBackColor = true;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(535, 210);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(81, 17);
+            this.label2.TabIndex = 18;
+            this.label2.Text = "Vizinhança:";
+            // 
             // EditorDeImagem
             // 
             this.AccessibleName = "EditorDeImagem";
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1062, 543);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.numericUpDown2);
+            this.Controls.Add(this.rbtn_mediana);
+            this.Controls.Add(this.rbtn_media);
+            this.Controls.Add(this.button_suavizar);
             this.Controls.Add(this.numericUpDown1);
             this.Controls.Add(this.chart_imagem_alterada);
             this.Controls.Add(this.rbtn_clarear);
@@ -191,6 +269,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart_imagem_cortada)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.chart_imagem_alterada)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,6 +286,11 @@
         private System.Windows.Forms.RadioButton rbtn_clarear;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart_imagem_alterada;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.Button button_suavizar;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.RadioButton rbtn_mediana;
+        private System.Windows.Forms.RadioButton rbtn_media;
+        private System.Windows.Forms.Label label2;
     }
 }
 

@@ -82,15 +82,21 @@ namespace Editor_de_imagens
 
         private void button_alterar_imagem_Click(object sender, EventArgs e)
         {
-            //zera a imagem, caso usem o botão dnv
-            pictureBox2.Image = null;
             //zera o chat, caso usem o botão dnv
             chart_imagem_alterada.Series["Cortada"].Points.Clear();
 
             if (rbtn_escurecer.Checked == true)
             {
                 //transforma a imagem da picture box da esquerda em bit map
-                Bitmap imagem_cortada = new Bitmap(pictureBox1.Image);
+                Bitmap imagem_cortada;
+                if (pictureBox2.Image == null)
+                {
+                    imagem_cortada = new Bitmap(pictureBox1.Image);
+                }
+                else
+                {
+                    imagem_cortada = new Bitmap(pictureBox2.Image);
+                }
                 //cria um novo bitmap para a imagem alterada
                 int altura = 360, largura = 360;
                 Bitmap imagem_alterada = new Bitmap(largura, altura);
@@ -151,7 +157,15 @@ namespace Editor_de_imagens
             if (rbtn_clarear.Checked == true)
             {
                 //transforma a imagem da picture box da esquerda em bit map
-                Bitmap imagem_cortada = new Bitmap(pictureBox1.Image);
+                Bitmap imagem_cortada;
+                if (pictureBox2.Image == null)
+                {
+                    imagem_cortada = new Bitmap(pictureBox1.Image);
+                }
+                else
+                {
+                    imagem_cortada = new Bitmap(pictureBox2.Image);
+                }
                 //cria um novo bitmap para a imagem alterada
                 int altura = 360, largura = 360;
                 Bitmap imagem_alterada = new Bitmap(largura, altura);
@@ -204,6 +218,155 @@ namespace Editor_de_imagens
                 //joga o bitmap imagem_cortada na picturebox
                 pictureBox2.Image = imagem_alterada;
 
+                for (int i = 0; i < ocorrencias.Length; i++)
+                {
+                    chart_imagem_alterada.Series["Cortada"].Points.AddXY(i, ocorrencias[i]);
+                }
+            }
+        }
+
+        private void button_suavizar_Click(object sender, EventArgs e)
+        {
+            //zera o chat, caso usem o botão dnv
+            chart_imagem_alterada.Series["Cortada"].Points.Clear();
+
+            if (rbtn_media.Checked == true)
+            {
+                //transforma a imagem da picture box da esquerda em bit map
+                Bitmap imagem_antiga;
+                if (pictureBox2.Image == null)
+                {
+                    imagem_antiga = new Bitmap(pictureBox1.Image);
+                }
+                else
+                {
+                    imagem_antiga = new Bitmap(pictureBox2.Image);
+                }
+                //cria um novo bitmap para a imagem alterada
+                int altura = 360, largura = 360;
+                Bitmap imagem_suave = new Bitmap(largura, altura);
+                //cria uma lista para contar quantas vezes cada cor apareceu
+                int[] ocorrencias = new int[256];
+
+                //armazena o tamanho da vizinhança
+                int vizinhanca = Convert.ToInt32(numericUpDown2.Value);
+
+                int variacao = Convert.ToInt32(Math.Sqrt(vizinhanca + 1)) / 2;
+
+                //esses 2 fors andam na imagem pixel por pixel
+                for (int coluna = 0; coluna < largura; coluna++)
+                {
+                    for (int linha = 0; linha < altura; linha++)
+                    {
+                        int soma = 0;
+                        int count = 0;
+                        int cor_suave;
+
+                        for (int vizinho_horizontal = coluna - variacao; vizinho_horizontal <= coluna + variacao; vizinho_horizontal += 1)
+                        {
+                            for (int vizinho_vertical = linha - variacao; vizinho_vertical <= linha + variacao; vizinho_vertical += 1)
+                            {
+                                if (vizinho_horizontal >= 0 && vizinho_vertical >= 0)
+                                {
+                                    if (vizinho_horizontal <= coluna && vizinho_vertical <= linha)
+                                    {
+                                        Color cor_do_pixel_argb = imagem_antiga.GetPixel(vizinho_horizontal, vizinho_vertical);
+                                        soma += Convert.ToInt32(cor_do_pixel_argb.R.ToString());
+                                        count += 1;
+                                    }
+                                }
+                            }
+                        }
+                        if (count == 0) { cor_suave = 0; }
+                        else
+                        {
+                            cor_suave = soma / count;
+                        }
+                        //Cria uma nova cor com os bytes definidos acima
+                        Color cor_suave_argb = new Color();
+                        //Alpha 255 é opaco, repetimos cor_suave 3 vezes para vermelho, azul e verde
+                        cor_suave_argb = Color.FromArgb(255, cor_suave, cor_suave, cor_suave);
+                        //Coloca o pixel na imagem suave
+                        imagem_suave.SetPixel(coluna, linha, cor_suave_argb);
+                        //A cada ocorrencia da cor na imagem, somamos 1 no seu valor do histograma
+                        ocorrencias[cor_suave] = ocorrencias[cor_suave] + 1;
+                    }
+                }
+
+                //Joga o bitmap imagem_cortada na picturebox
+                pictureBox2.Image = imagem_suave;
+                //Joga o vetor no histograma
+                for (int i = 0; i < ocorrencias.Length; i++)
+                {
+                    chart_imagem_alterada.Series["Cortada"].Points.AddXY(i, ocorrencias[i]);
+                }
+            }
+
+            if (rbtn_mediana.Checked == true)
+            {
+                //transforma a imagem da picture box da esquerda em bit map
+                Bitmap imagem_antiga;
+                if (pictureBox2.Image == null)
+                {
+                    imagem_antiga = new Bitmap(pictureBox1.Image);
+                }
+                else
+                {
+                    imagem_antiga = new Bitmap(pictureBox2.Image);
+                }
+                //cria um novo bitmap para a imagem alterada
+                int altura = 360, largura = 360;
+                Bitmap imagem_suave = new Bitmap(largura, altura);
+                //cria uma lista para contar quantas vezes cada cor apareceu
+                int[] ocorrencias = new int[256];
+
+                //armazena o tamanho da vizinhança
+                int vizinhanca = Convert.ToInt32(numericUpDown2.Value);
+                int variacao = Convert.ToInt32(Math.Sqrt(vizinhanca + 1)) / 2;
+
+                //esses 2 fors andam na imagem pixel por pixel
+                for (int coluna = 0; coluna < largura; coluna++)
+                {
+                    for (int linha = 0; linha < altura; linha++)
+                    {
+                        List<int> lista_mediana = new List<int>();
+
+                        for (int vizinho_horizontal = coluna - variacao; vizinho_horizontal <= coluna + variacao; vizinho_horizontal += 1)
+                        {
+                            for (int vizinho_vertical = linha - variacao; vizinho_vertical <= linha + variacao; vizinho_vertical += 1)
+                            {
+                                if (vizinho_horizontal >= 0 && vizinho_vertical >= 0)
+                                {
+                                    if (vizinho_horizontal <= coluna && vizinho_vertical <= linha)
+                                    {
+                                        Color cor_do_pixel_argb = imagem_antiga.GetPixel(vizinho_horizontal, vizinho_vertical);
+                                        lista_mediana.Add(Convert.ToInt32(cor_do_pixel_argb.R.ToString()));
+                                    }
+                                }
+                            }
+                        }
+
+                        int cor_suave;
+                        List<int> lista_ordenada = lista_mediana.OrderBy(o => Convert.ToInt32 (o.ToString() ))
+                            .ToList();
+
+                        if (lista_ordenada.Count == 0) { cor_suave = 0; }
+                        else { cor_suave = lista_ordenada[lista_ordenada.Count / 2]; }
+
+                        //Cria uma nova cor com os bytes definidos acima
+                        Color cor_suave_argb = new Color();
+                        //Alpha 255 é opaco, repetimos cor_suave 3 vezes para vermelho, azul e verde
+                        cor_suave_argb = Color.FromArgb(255, cor_suave, cor_suave, cor_suave);
+                        //Coloca o pixel na imagem suave
+                        imagem_suave.SetPixel(coluna, linha, cor_suave_argb);
+                        //A cada ocorrencia da cor na imagem, somamos 1 no seu valor do histograma
+                        ocorrencias[cor_suave] = ocorrencias[cor_suave] + 1;
+                    }
+                }
+
+                //Joga o bitmap imagem_cortada na picturebox
+                pictureBox2.Image = imagem_suave;
+                //Joga o vetor no histograma
                 for (int i = 0; i < ocorrencias.Length; i++)
                 {
                     chart_imagem_alterada.Series["Cortada"].Points.AddXY(i, ocorrencias[i]);
