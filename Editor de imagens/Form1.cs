@@ -373,5 +373,86 @@ namespace Editor_de_imagens
                 }
             }
         }
+
+        private void button_realcar_Click(object sender, EventArgs e)
+        {
+            //zera o chat, caso usem o botão dnv
+            chart_imagem_alterada.Series["Cortada"].Points.Clear();
+
+            if (rbtn_equalizar.Checked == true)
+            {
+                //transforma a imagem anterior em bitmap
+                Bitmap imagem_antiga;
+                if (pictureBox2.Image == null)
+                {
+                    imagem_antiga = new Bitmap(pictureBox1.Image);
+                }
+                else
+                {
+                    imagem_antiga = new Bitmap(pictureBox2.Image);
+                }
+
+                //cria um bitmap para a imagem nova
+                int altura = 360, largura = 360;
+                Bitmap imagem_nova = new Bitmap(largura, altura);
+                //cria uma lista para contar quantas vezes cada cor apareceu na imagem antiga
+                int[] ocorrencias_antigas = new int[256];
+
+                //esses 2 for's andam na imagem pixel por pixel
+                for (int coluna = 0; coluna < largura; coluna++)
+                {
+                    for (int linha = 0; linha < altura; linha++)
+                    {
+                        //primeiro pegamos a cor do pixel atual
+                        int cor_antiga = Convert.ToInt32(imagem_antiga.GetPixel(coluna, linha).R.ToString());
+
+                        //somamos +1 na cor do pixel atual no histograma da imagem antiga
+                        ocorrencias_antigas[cor_antiga] += 1;
+                    }
+                }
+
+                int frequencia_acumulada = 0;
+                int[] g_para_q = new int[256];
+                //idealmente, cada nivel de cinza deveria ter a seguinte frequencia:
+                int ideal_de_pixels_por_nivel_de_cinza = (largura * altura) / ocorrencias_antigas.Length;
+
+                for (int g = 0; g < ocorrencias_antigas.Length; g+=1)
+                {
+                    //primeiro somamos a frequencia da cor atual à "frequencia_acumulada"
+                    frequencia_acumulada += ocorrencias_antigas[g];
+                    //dessa forma, "g_para_q" terá a cor antiga como chave e a nova como valor (não é um histograma)
+                    g_para_q[g] = Math.Max( (frequencia_acumulada/ideal_de_pixels_por_nivel_de_cinza)-1 , 0);
+                }
+
+                //esse é o histograma final
+                int[] ocorrencias_finais = new int[256];
+                //esses 2 fors andam na imagem pixel por pixel
+                for (int coluna = 0; coluna < largura; coluna++)
+                {
+                    for (int linha = 0; linha < altura; linha++)
+                    {
+                        //pega a cor do pixel da imagem ANTIGA
+                        int cor_antiga = Convert.ToInt32(imagem_antiga.GetPixel(coluna, linha).R.ToString());
+                        //usamos g_para_q para ver qual é a cor que devemos colocar no lugar da antiga
+                        int cor_nova = g_para_q[cor_antiga];
+
+                        //Alpha 255 é opaco, repetimos cor_suave 3 vezes para vermelho, verde e azul
+                        Color cor_nova_argb = Color.FromArgb(255, cor_nova, cor_nova, cor_nova);
+                        //Coloca o pixel na imagem nova
+                        imagem_nova.SetPixel(coluna, linha, cor_nova_argb);
+                        //e soma a 1 na frequencia dessa cor no histograma final
+                        ocorrencias_finais[cor_nova] += 1;
+                    }
+                }
+
+                //Joga o bitmap imagem_cortada na picturebox
+                pictureBox2.Image = imagem_nova;
+                //Joga o vetor no histograma
+                for (int cor_final = 0; cor_final < ocorrencias_finais.Length; cor_final++)
+                {
+                    chart_imagem_alterada.Series["Cortada"].Points.AddXY(cor_final, ocorrencias_finais[cor_final]);
+                }
+            }
+        }
     }
 }
