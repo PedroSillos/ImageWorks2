@@ -517,5 +517,86 @@ namespace Editor_de_imagens
                 chart_imagem_alterada.Series["Cortada"].Points.AddXY(i, ocorrencias[i]);
             }
         }
+
+        private void btn_passa_alta_Click(object sender, EventArgs e)
+        {
+            //zera o chart, caso usem o botão dnv
+            chart_imagem_alterada.Series["Cortada"].Points.Clear();
+
+            //transforma a imagem da picture box da esquerda em bit map
+            Bitmap imagem_antiga;
+            if (pictureBox2.Image == null)
+            {
+                imagem_antiga = new Bitmap(pictureBox1.Image);
+            }
+            else
+            {
+                imagem_antiga = new Bitmap(pictureBox2.Image);
+            }
+
+            //cria um novo bitmap para a imagem alterada
+            int altura = 360, largura = 360;
+            Bitmap imagem_passa_alta = new Bitmap(largura, altura);
+            //cria uma lista para contar quantas vezes cada cor apareceu
+            int[] ocorrencias = new int[256];
+
+            //armazena o tamanho da vizinhança
+            int vizinhanca = Convert.ToInt32(numericUpDown2.Value);
+
+            int variacao = Convert.ToInt32(Math.Sqrt(vizinhanca + 1)) / 2;
+
+            //esses 2 fors andam na imagem pixel por pixel
+            for (int coluna_imagem = 0; coluna_imagem < largura; coluna_imagem++)
+            {
+                for (int linha_imagem = 0; linha_imagem < altura; linha_imagem++)
+                {
+                    int soma = 0;
+
+                    for (int vizinho_horizontal = coluna_imagem - variacao; vizinho_horizontal <= coluna_imagem + variacao; vizinho_horizontal += 1)
+                    {
+                        for (int vizinho_vertical = linha_imagem - variacao; vizinho_vertical <= linha_imagem + variacao; vizinho_vertical += 1)
+                        {
+                            //nao deixa pegar pixels de fora da imagem (na esquerda ou em cima)
+                            if (vizinho_horizontal >= 0 && vizinho_vertical >= 0)
+                            {
+                                //nao deixa pegar pixels de fora da imagem (na direita ou em baixo)
+                                if (vizinho_horizontal <= coluna_imagem && vizinho_vertical <= linha_imagem)
+                                {
+                                    Color cor_do_pixel_argb = imagem_antiga.GetPixel(vizinho_horizontal, vizinho_vertical);
+                                    //se for o pixel de interesse
+                                    if(vizinho_horizontal==coluna_imagem && vizinho_vertical==linha_imagem)
+                                    {
+                                        soma += 8 * Convert.ToInt32(cor_do_pixel_argb.R.ToString());
+                                    }
+                                    else
+                                    {
+                                        soma += -1 * Convert.ToInt32(cor_do_pixel_argb.R.ToString());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    
+                    if (soma < 0) { soma = 0; }
+                    if (soma > 255) { soma = 255; }
+
+                    //Cria uma nova cor com os bytes definidos acima
+                    //Alpha 255 é opaco, repetimos cor_suave 3 vezes para vermelho, azul e verde
+                    Color pixel_passa_alta_argb = Color.FromArgb(255, soma, soma, soma);
+                    //Coloca o pixel na imagem suave
+                    imagem_passa_alta.SetPixel(coluna_imagem, linha_imagem, pixel_passa_alta_argb);
+                    //A cada ocorrencia da cor na imagem, somamos 1 no seu valor do histograma
+                    ocorrencias[soma] = ocorrencias[soma] + 1;
+                }
+            }
+
+            //Joga o bitmap imagem_cortada na picturebox
+            pictureBox2.Image = imagem_passa_alta;
+            //Joga o vetor no histograma
+            for (int i = 0; i < ocorrencias.Length; i++)
+            {
+                chart_imagem_alterada.Series["Cortada"].Points.AddXY(i, ocorrencias[i]);
+            }
+        }
     }
 }

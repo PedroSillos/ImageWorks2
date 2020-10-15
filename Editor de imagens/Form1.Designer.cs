@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea12 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend12 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series12 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.button_carregar_imagem = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.button_alterar_imagem = new System.Windows.Forms.Button();
@@ -119,17 +119,17 @@
             // chart_imagem_cortada
             // 
             this.chart_imagem_cortada.BackColor = System.Drawing.Color.Transparent;
-            chartArea11.Name = "ChartArea1";
-            this.chart_imagem_cortada.ChartAreas.Add(chartArea11);
-            legend11.Name = "Legend1";
-            this.chart_imagem_cortada.Legends.Add(legend11);
+            chartArea5.Name = "ChartArea1";
+            this.chart_imagem_cortada.ChartAreas.Add(chartArea5);
+            legend5.Name = "Legend1";
+            this.chart_imagem_cortada.Legends.Add(legend5);
             this.chart_imagem_cortada.Location = new System.Drawing.Point(163, 378);
             this.chart_imagem_cortada.Name = "chart_imagem_cortada";
-            series11.ChartArea = "ChartArea1";
-            series11.IsVisibleInLegend = false;
-            series11.Legend = "Legend1";
-            series11.Name = "Cortada";
-            this.chart_imagem_cortada.Series.Add(series11);
+            series5.ChartArea = "ChartArea1";
+            series5.IsVisibleInLegend = false;
+            series5.Legend = "Legend1";
+            series5.Name = "Cortada";
+            this.chart_imagem_cortada.Series.Add(series5);
             this.chart_imagem_cortada.Size = new System.Drawing.Size(360, 153);
             this.chart_imagem_cortada.TabIndex = 8;
             this.chart_imagem_cortada.TabStop = false;
@@ -148,17 +148,17 @@
             // chart_imagem_alterada
             // 
             this.chart_imagem_alterada.BackColor = System.Drawing.Color.Transparent;
-            chartArea12.Name = "ChartArea1";
-            this.chart_imagem_alterada.ChartAreas.Add(chartArea12);
-            legend12.Name = "Legend1";
-            this.chart_imagem_alterada.Legends.Add(legend12);
+            chartArea6.Name = "ChartArea1";
+            this.chart_imagem_alterada.ChartAreas.Add(chartArea6);
+            legend6.Name = "Legend1";
+            this.chart_imagem_alterada.Legends.Add(legend6);
             this.chart_imagem_alterada.Location = new System.Drawing.Point(662, 378);
             this.chart_imagem_alterada.Name = "chart_imagem_alterada";
-            series12.ChartArea = "ChartArea1";
-            series12.IsVisibleInLegend = false;
-            series12.Legend = "Legend1";
-            series12.Name = "Cortada";
-            this.chart_imagem_alterada.Series.Add(series12);
+            series6.ChartArea = "ChartArea1";
+            series6.IsVisibleInLegend = false;
+            series6.Legend = "Legend1";
+            series6.Name = "Cortada";
+            this.chart_imagem_alterada.Series.Add(series6);
             this.chart_imagem_alterada.Size = new System.Drawing.Size(360, 153);
             this.chart_imagem_alterada.TabIndex = 11;
             this.chart_imagem_alterada.TabStop = false;
@@ -249,7 +249,7 @@
             this.button_realcar.AccessibleName = "button_realcar";
             this.button_realcar.AutoSize = true;
             this.button_realcar.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button_realcar.Location = new System.Drawing.Point(529, 353);
+            this.button_realcar.Location = new System.Drawing.Point(529, 320);
             this.button_realcar.Name = "button_realcar";
             this.button_realcar.Size = new System.Drawing.Size(127, 27);
             this.button_realcar.TabIndex = 19;
@@ -261,7 +261,7 @@
             // rbtn_equalizar
             // 
             this.rbtn_equalizar.AutoSize = true;
-            this.rbtn_equalizar.Location = new System.Drawing.Point(538, 326);
+            this.rbtn_equalizar.Location = new System.Drawing.Point(538, 293);
             this.rbtn_equalizar.Name = "rbtn_equalizar";
             this.rbtn_equalizar.Size = new System.Drawing.Size(106, 21);
             this.rbtn_equalizar.TabIndex = 20;
@@ -273,7 +273,7 @@
             this.btn_realcar_bordas.AccessibleName = "button_realcar";
             this.btn_realcar_bordas.AutoSize = true;
             this.btn_realcar_bordas.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_realcar_bordas.Location = new System.Drawing.Point(529, 260);
+            this.btn_realcar_bordas.Location = new System.Drawing.Point(529, 378);
             this.btn_realcar_bordas.Name = "btn_realcar_bordas";
             this.btn_realcar_bordas.Size = new System.Drawing.Size(127, 27);
             this.btn_realcar_bordas.TabIndex = 21;
@@ -287,13 +287,14 @@
             this.btn_passa_alta.AccessibleName = "button_realcar";
             this.btn_passa_alta.AutoSize = true;
             this.btn_passa_alta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btn_passa_alta.Location = new System.Drawing.Point(529, 293);
+            this.btn_passa_alta.Location = new System.Drawing.Point(529, 260);
             this.btn_passa_alta.Name = "btn_passa_alta";
             this.btn_passa_alta.Size = new System.Drawing.Size(127, 27);
             this.btn_passa_alta.TabIndex = 22;
             this.btn_passa_alta.TabStop = false;
             this.btn_passa_alta.Text = "Passa alta";
             this.btn_passa_alta.UseVisualStyleBackColor = true;
+            this.btn_passa_alta.Click += new System.EventHandler(this.btn_passa_alta_Click);
             // 
             // EditorDeImagem
             // 
