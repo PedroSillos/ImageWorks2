@@ -454,5 +454,68 @@ namespace Editor_de_imagens
                 }
             }
         }
+
+        private void btn_realcar_bordas_Click(object sender, EventArgs e)
+        {
+            //zera o chart, caso usem o botão dnv
+            chart_imagem_alterada.Series["Cortada"].Points.Clear();
+
+            //transforma a imagem da picture box da esquerda em bit map
+            Bitmap imagem_antiga;
+            if (pictureBox2.Image == null)
+            {
+                imagem_antiga = new Bitmap(pictureBox1.Image);
+            }
+            else
+            {
+                imagem_antiga = new Bitmap(pictureBox2.Image);
+            }
+            //cria um novo bitmap para a imagem alterada
+            int altura = 360, largura = 360;
+            Bitmap imagem_gradiente = new Bitmap(largura, altura);
+            //cria uma lista para contar quantas vezes cada cor apareceu
+            int[] ocorrencias = new int[256];
+
+            //esses 2 fors andam na imagem pixel por pixel
+            for (int coluna_imagem = 0; coluna_imagem < largura; coluna_imagem++)
+            {
+                for (int linha_imagem = 0; linha_imagem < altura; linha_imagem++)
+                {
+                    Color pixel_atual_argb = imagem_antiga.GetPixel(coluna_imagem, linha_imagem);
+                    Color pixel_direita_argb = pixel_atual_argb;
+                    // se coluna +1 estiver na imagem
+                    if (coluna_imagem+1 < 360)
+                    { pixel_direita_argb = imagem_antiga.GetPixel(coluna_imagem + 1, linha_imagem); }
+                    Color pixel_debaixo_argb = pixel_atual_argb;
+                    //se linha + 1 estiver na imagem
+                    if (linha_imagem+1 < 360)
+                    { pixel_debaixo_argb = imagem_antiga.GetPixel(coluna_imagem, linha_imagem + 1); }
+                    
+                    int cor_atual = Convert.ToInt32(pixel_atual_argb.R.ToString());
+                    int cor_direita = Convert.ToInt32(pixel_direita_argb.R.ToString());
+                    int cor_debaixo = Convert.ToInt32(pixel_debaixo_argb.R.ToString());
+
+                    int cor_gradiente = Math.Abs(cor_atual - cor_direita) + Math.Abs(cor_atual - cor_debaixo);
+                    //caso a soma passe de 255, deixa como 255
+                    if(cor_gradiente > 255) { cor_gradiente = 255; }
+
+                    //Cria uma nova cor com os bytes definidos acima
+                    //Alpha 255 é opaco, repetimos cor_suave 3 vezes para vermelho, azul e verde
+                    Color pixel_gradiente_argb = Color.FromArgb(255, cor_gradiente, cor_gradiente, cor_gradiente);
+                    //Coloca o pixel na imagem suave
+                    imagem_gradiente.SetPixel(coluna_imagem, linha_imagem, pixel_gradiente_argb);
+                    //A cada ocorrencia da cor na imagem, somamos 1 no seu valor do histograma
+                    ocorrencias[cor_gradiente] = ocorrencias[cor_gradiente] + 1;
+                }
+            }
+
+            //Joga o bitmap imagem_cortada na picturebox
+            pictureBox2.Image = imagem_gradiente;
+            //Joga o vetor no histograma
+            for (int i = 0; i < ocorrencias.Length; i++)
+            {
+                chart_imagem_alterada.Series["Cortada"].Points.AddXY(i, ocorrencias[i]);
+            }
+        }
     }
 }
